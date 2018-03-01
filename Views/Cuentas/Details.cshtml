@@ -1,0 +1,66 @@
+﻿@model BancosMDacosta.Cuentas
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cuentas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumCuenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumCuenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaApertura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaApertura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Saldo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Saldo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Clientes.NifNie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Clientes.NifNie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Entidades.CodEntidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Entidades.CodEntidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TiposCuenta.CodTipoCuenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiposCuenta.CodTipoCuenta)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdCuenta }) |
+    @Html.ActionLink("Back to List", "Get")
+</p>

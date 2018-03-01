@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BancosMDacosta.Cuentas>
+
+@{
+    ViewBag.Title = "Get";
+}
+
+<h2>Get</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumCuenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaApertura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Saldo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clientes.NifNie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Entidades.CodEntidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TiposCuenta.CodTipoCuenta)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumCuenta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaApertura)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Saldo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Clientes.NifNie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Entidades.CodEntidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TiposCuenta.CodTipoCuenta)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdCuenta }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdCuenta }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdCuenta })
+        </td>
+    </tr>
+}
+
+</table>

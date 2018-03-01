@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BancosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BancoUsers">
+    <Key>
+      <PropertyRef Name="IdBancoUser" />
+    </Key>
+    <Property Name="IdBancoUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Grupos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="IdCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NifNie" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Cuentas" Relationship="Self.FK_Cuentas_Clientes_IdCliente" FromRole="Clientes" ToRole="Cuentas" />
+    <NavigationProperty Name="Operaciones" Relationship="Self.FK_Operaciones_Clientes_IdCliente" FromRole="Clientes" ToRole="Operaciones" />
+    <NavigationProperty Name="Prestamos" Relationship="Self.FK_Prestamos_Clientes_IdCliente" FromRole="Clientes" ToRole="Prestamos" />
+  </EntityType>
+  <EntityType Name="Cuentas">
+    <Key>
+      <PropertyRef Name="IdCuenta" />
+    </Key>
+    <Property Name="IdCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCliente" Type="Int32" Nullable="false" />
+    <Property Name="IdEntidad" Type="Int32" Nullable="false" />
+    <Property Name="NumCuenta" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="FechaApertura" Type="DateTime" Precision="0" />
+    <Property Name="IdTipoCuenta" Type="Int32" />
+    <Property Name="Saldo" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_Cuentas_Clientes_IdCliente" FromRole="Cuentas" ToRole="Clientes" />
+    <NavigationProperty Name="Entidades" Relationship="Self.FK_Cuentas_Entidades" FromRole="Cuentas" ToRole="Entidades" />
+    <NavigationProperty Name="TiposCuenta" Relationship="Self.FK_Cuentas_TiposCuenta" FromRole="Cuentas" ToRole="TiposCuenta" />
+  </EntityType>
+  <EntityType Name="Entidades">
+    <Key>
+      <PropertyRef Name="IdEntidad" />
+    </Key>
+    <Property Name="IdEntidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodEntidad" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Cuentas" Relationship="Self.FK_Cuentas_Entidades" FromRole="Entidades" ToRole="Cuentas" />
+  </EntityType>
+  <EntityType Name="Operaciones">
+    <Key>
+      <PropertyRef Name="IdOperacion" />
+    </Key>
+    <Property Name="IdOperacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCliente" Type="Int32" Nullable="false" />
+    <Property Name="Tipo" Type="Int32" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_Operaciones_Clientes_IdCliente" FromRole="Operaciones" ToRole="Clientes" />
+  </EntityType>
+  <EntityType Name="Prestamos">
+    <Key>
+      <PropertyRef Name="IdPrestamo" />
+    </Key>
+    <Property Name="IdPrestamo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCliente" Type="Int32" Nullable="false" />
+    <Property Name="Importe" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_Prestamos_Clientes_IdCliente" FromRole="Prestamos" ToRole="Clientes" />
+  </EntityType>
+  <EntityType Name="TiposCuenta">
+    <Key>
+      <PropertyRef Name="IdTipoCuenta" />
+    </Key>
+    <Property Name="IdTipoCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodTipoCuenta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Denominacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Cuentas" Relationship="Self.FK_Cuentas_TiposCuenta" FromRole="TiposCuenta" ToRole="Cuentas" />
+  </EntityType>
+  <Association Name="FK_Cuentas_Clientes_IdCliente">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="Cuentas">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operaciones_Clientes_IdCliente">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="Operaciones" Type="Self.Operaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="Operaciones">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Prestamos_Clientes_IdCliente">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="Prestamos" Type="Self.Prestamos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="Prestamos">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuentas_Entidades">
+    <End Role="Entidades" Type="Self.Entidades" Multiplicity="1" />
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entidades">
+        <PropertyRef Name="IdEntidad" />
+      </Principal>
+      <Dependent Role="Cuentas">
+        <PropertyRef Name="IdEntidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuentas_TiposCuenta">
+    <End Role="TiposCuenta" Type="Self.TiposCuenta" Multiplicity="0..1" />
+    <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposCuenta">
+        <PropertyRef Name="IdTipoCuenta" />
+      </Principal>
+      <Dependent Role="Cuentas">
+        <PropertyRef Name="IdTipoCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BancosEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BancoUsers" EntityType="Self.BancoUsers" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+    <EntitySet Name="Cuentas" EntityType="Self.Cuentas" />
+    <EntitySet Name="Entidades" EntityType="Self.Entidades" />
+    <EntitySet Name="Operaciones" EntityType="Self.Operaciones" />
+    <EntitySet Name="Prestamos" EntityType="Self.Prestamos" />
+    <EntitySet Name="TiposCuenta" EntityType="Self.TiposCuenta" />
+    <AssociationSet Name="FK_Cuentas_Clientes_IdCliente" Association="Self.FK_Cuentas_Clientes_IdCliente">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Cuentas" EntitySet="Cuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operaciones_Clientes_IdCliente" Association="Self.FK_Operaciones_Clientes_IdCliente">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Operaciones" EntitySet="Operaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Prestamos_Clientes_IdCliente" Association="Self.FK_Prestamos_Clientes_IdCliente">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Prestamos" EntitySet="Prestamos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuentas_Entidades" Association="Self.FK_Cuentas_Entidades">
+      <End Role="Entidades" EntitySet="Entidades" />
+      <End Role="Cuentas" EntitySet="Cuentas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuentas_TiposCuenta" Association="Self.FK_Cuentas_TiposCuenta">
+      <End Role="TiposCuenta" EntitySet="TiposCuenta" />
+      <End Role="Cuentas" EntitySet="Cuentas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

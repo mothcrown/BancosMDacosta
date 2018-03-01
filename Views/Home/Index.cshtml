@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron" style="background: linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)), url('@Url.Content("~/Content/Images/sell-gold-coins.jpg")'); background-size: cover; position: relative;">
+    <h1 style="color: white;">BancosMDacosta.NET</h1>
+    <p class="lead" style="color: white;">¡Tu banco superchulo en el Internete!</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Clientes</h2>
+        <p>
+            <a class="btn btn-default" href="@Url.Action("Get", "Clientes")" style="font-weight:bold">
+                <img src="~/Content/Images/Groups-Meeting-Dark-icon.png" alt="Clientes" width="128" />
+                Ir a clientes&raquo;
+            </a>
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Cuentas</h2>
+        <p>
+            <a class="btn btn-default" href="@Url.Action("Get", "Cuentas")" style="font-weight:bold">
+                <img src="~/Content/Images/dollar-folder-icon.png" alt="Cuentas" width="128" />
+                Ir a cuentas&raquo;
+            </a>
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Notificaciones</h2>
+        <p>
+            <a class="btn btn-default" href="@Url.Action("Index", "Notificaciones")" style="font-weight:bold">
+                <img src="~/Content/Images/License-manager-icon.png" alt="Notificaciones" width="128" />
+                Ir a notificaciones&raquo;
+            </a>
+        </p>
+    </div>
+    <div class="col-md-4">
+        <p>
+            @Html.ActionLink("Acerca de...", "About", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>

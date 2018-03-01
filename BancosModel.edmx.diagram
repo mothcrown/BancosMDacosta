@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9ebfdfd45b11481e953bcf7e3551ae56" Name="Diagram1">
+        <EntityTypeShape EntityType="BancosModel.BancoUsers" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BancosModel.Clientes" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BancosModel.Cuentas" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BancosModel.Entidades" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BancosModel.Operaciones" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BancosModel.Prestamos" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BancosModel.TiposCuenta" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="BancosModel.FK_Cuentas_Clientes_IdCliente" ManuallyRouted="false" />
+        <AssociationConnector Association="BancosModel.FK_Operaciones_Clientes_IdCliente" ManuallyRouted="false" />
+        <AssociationConnector Association="BancosModel.FK_Prestamos_Clientes_IdCliente" ManuallyRouted="false" />
+        <AssociationConnector Association="BancosModel.FK_Cuentas_Entidades" ManuallyRouted="false" />
+        <AssociationConnector Association="BancosModel.FK_Cuentas_TiposCuenta" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
